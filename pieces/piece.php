@@ -28,7 +28,7 @@ abstract class Piece {
    *              can be moved to the square passed in.  This method must be overwritten in
    *              all sub classes.
    */
-  abstract protected function moveAllowed(Square s); //returns MoveType Object
+  abstract protected function moveAllowed(Square $s); //returns MoveType Object
   
   //Constructor
   function __construct(Board $b, Colour $c, Square $s) {
