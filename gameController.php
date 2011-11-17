@@ -11,6 +11,8 @@
  *    currently is, and passes the input from the user(s) to the board
  * Remarks:
  *  - The UI is currently missing
+ *  - Checking for Checks and Checkmates is currently missing
+ *  - The logic to know when to end the game is currently missing
  */
 class GameController {
   //Private Properties

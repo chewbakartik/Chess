@@ -7,7 +7,7 @@
  *  - int $index
  *  - Piece $piece
  * Methods:
- * Description66: The square is the placeholder for the game pieces
+ * Description: The square is the placeholder for the game pieces
  */
 class Square {
   public $column;

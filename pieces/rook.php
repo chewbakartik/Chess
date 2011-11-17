@@ -55,6 +55,7 @@ class Rook extends Piece {
       if($this->spacesBetweenEmpty($this->location, $delta / 1, 1, $direction)) {
         return MoveType::NORMAL;
       }
+      
       //Check for Castle Move
     }
     
