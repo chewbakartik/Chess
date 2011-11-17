@@ -5,22 +5,29 @@
  */
 class Rook extends Piece {
 
-  function __construct(Board $b, Colour $c, Square $s) {
-    parent::__construct($b, $c, $s);
+  function __construct(Board $b, Colour $c, $index) {
+    parent::__construct($b, $c, $index, "rook");
   }
   
   /*
    * Name: moveAllowed
-   * Parameters:  Square $s: The Square that the piece is attempting to move to.
+   * Parameters:
+   *  - Square $s: The Square that the piece is attempting to move to.
+   * Returns: MoveType constant
+   * Description: This method contains the logic that determines whether or not the piece
+   *    can be moved to the square passed in.  This method must be overwritten in
+   *    all sub classes.
    * Remarks:
-   *    - Rook can move by staying on the same row or same column
+   *  - Rook can move by staying on the same row or same column
    */
   protected function moveAllowed(Square $s) {
     $newColumn = $s->column;
     $newRow = $s->row;
+    $currentColumn = $this->board->getColumnFromSquareIndex($this->location)
+    $currentRow = $this->board->getRowFromSquareIndex($this->location)
 
     //Get the position difference between the current square and the desired square
-    $delta = $s->index - $this->location->index;
+    $delta = $s->index - $this->location;
     
     //Determine which direction the piece is moving, up or down the array
     if($delta > 0) {
@@ -35,17 +42,17 @@ class Rook extends Piece {
     }
 
     //Moving up and down a column
-    if($newColumn == $this->location->column) && ($newRow != $this->location->row) {
+    if($newColumn == $currentColumn && ($newRow != $currentRow) {
       //Check to see if spaces in between are the same
-      if($this->spacesBetweenEmpty($this->location->index, $delta / 8, 8, $direction)) {
+      if($this->spacesBetweenEmpty($this->location, $delta / 8, 8, $direction)) {
         return MoveType::NORMAL;
       }
     }
     
     //Moving up and down a row
-    if($newColumn != $this->location->column) && ($newRow == $this->location->row) {
+    if($newColumn != $currentColumn) && ($newRow == $currentRow) {
       //Check to see if spaces in between are the same
-      if($this->spacesBetweenEmpty($this->location->index, $delta / 1, 1, $direction)) {
+      if($this->spacesBetweenEmpty($this->location, $delta / 1, 1, $direction)) {
         return MoveType::NORMAL;
       }
       //Check for Castle Move
@@ -53,19 +60,6 @@ class Rook extends Piece {
     
     //If the above cases do not satisfy, move is illegal
     return MoveType::ILLEGAL;
-  }
-  
-  /*
-   * Name:        tryMove
-   * Parameters:  Square $s: The Square that the piece is attempting to move to.
-   * Description: This method will attempt to move the piece on the board
-   *              Overrides method on parent class in order to consider the special Castle move
-   */
-  function tryMove(Square $s) {
-    $mt = $this->moveAllowed($s);
-    if($mt != MoveType::ILLEGAL) {
-      $this->board->move($this->location, $s);
-    }
   }
 }
 ?>
