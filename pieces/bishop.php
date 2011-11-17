@@ -13,8 +13,8 @@ class Bishop extends Piece {
    * Name: moveAllowed
    * Parameters:  Square $s: The Square that the piece is attempting to move to.
    * Remarks:
-   *    - A delta of multiples of 9 is the bishop moving diagonally from top left to bottom right (or vice versa)
-   *    - A delta of multiples of 7 is the bishop moving diagonally from top right to bottom left (or vice versa)
+   *    - A delta of multiples of 9 is the bishop moving diagonally between top left and bottom right
+   *    - A delta of multiples of 7 is the bishop moving diagonally between top right and bottom left
    */
   protected function moveAllowed(Square $s) {
     //Get the position difference between the current square and the desired square
@@ -32,14 +32,14 @@ class Bishop extends Piece {
       return MoveType::ILLEGAL;
     }
 
-    // Moving from top left to bottom right
+    // Moving diagonally between top left and bottom right
     if(abs($delta) % 9 == 0) {
       if($this->board->spacesBetweenEmpty($this->location->index, $delta / 9, 9, $direction)) {
         return MoveType::NORMAL;
       }
     }
     
-    // Moving from top right to bottom left
+    // Moving diagonally between top right and bottom left
     if(abs($delta) % 7 == 0) {
       if($this->spacesBetweenEmpty($this->location->index, $delta / 7, 7, $direction)) {
         return MoveType::NORMAL;

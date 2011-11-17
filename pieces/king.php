@@ -31,6 +31,8 @@ class King extends Piece {
     if((abs($delta) == 1) || (abs($delta) == 7) || (abs($delta) == 9) || (abs($delta) == 8)){
       return MoveType::NORMAL;
     }
+
+    //If the above cases do not satisfy, move is illegal
     return MoveType::ILLEGAL;
   }
 }

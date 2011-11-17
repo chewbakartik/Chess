@@ -19,14 +19,20 @@ class Knight extends Piece {
    *    - A delta of 17 is the Knight moving up 2 left 1 or down 2 right 1
    */
   protected function moveAllowed(Square $s) {
+    //Get the position difference between the current square and the desired square
     $delta = $s->index - $this->location->index;
+
+    //A piece may not be able to move to another square with a piece of the same colour
     if($this-board->hasSameColourPiece($s, $this->colour)) {
       return MoveType::ILLEGAL;
     }
 
+    //Check for a normal move
     if((abs($delta) == 6) || (abs($delta) == 10) || (abs($delta) == 15) || (abs($delta) == 17)){
       return MoveType::NORMAL;
     }
+
+    //If the above cases do not satisfy, move is illegal
     return MoveType::ILLEGAL;
   }
 }
