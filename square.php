@@ -1,4 +1,14 @@
 <?php
+/*
+ * Class Name: Square
+ * Properties:
+ *  - int $column
+ *  - int $row
+ *  - int $index
+ *  - Piece $piece
+ * Methods:
+ * Description66: The square is the placeholder for the game pieces
+ */
 class Square {
   public $column;
   public $row;
